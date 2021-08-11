@@ -183,7 +183,7 @@ void save_dialogue(const ExtractedData& d){
 	cout << "Filename (default is " << default_filename << "): ";
 
 	// Get rid of newline character left in buffer
-	cin >> ws;
+	cin.ignore()
 
 	string filename;
 	getline(cin, filename);
