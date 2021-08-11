@@ -19,7 +19,7 @@ cd stegcrack/src
 
 Compile the program
 ```bash
-gcc -ljpeg -lz -lstdc++ -std=c++11 main.cc utils.cc file_handling.cc ui.cc Extractor.cc -O2 -o ../stegcrack
+clang main.cc utils.cc file_handling.cc ui.cc Extractor.cc -ljpeg -pthread -lstdc++ -lz -lm -std=c++11 -O2 -o ../stegcrack
 ```
 
 Move out of the source directory
@@ -63,4 +63,4 @@ Once the seed has been generated, Steghide first embeds metadata (magic bytes, S
 
 This metadata can be used to determine whether or not each seed has been used to hide data. For example, the first 3 bytes embedded are always 0x73 0x68 0x8d (very nearly the ascii string "shm" - StegHide Magic). If a given seed does not generate these bytes, it can be discarded as it has definitely not been used to hide data. This continues until either all seeds are discarded, or a valid seed is found. A valid seed indicates hidden data.
 
-By default, Steghide encrypts data using the full password before embedding. This means that in most cases, this script will only be able to extract this encrypted data. However, if encryption was disabled during embedding, this script can fully extract the hidden data in plain text.
+By default, Steghide encrypts data using the full password before embedding. This means that in most cases, Stegcrack will only be able to extract this encrypted data. However, if encryption was disabled during embedding, Stegcrack can fully extract the hidden data in plain text.

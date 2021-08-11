@@ -3,6 +3,8 @@
 #include "ui.hh"
 #include "file_handling.hh"
 
+#include <math.h>
+#include <iomanip>
 #include <unistd.h>
 #include <chrono>
 #include <fstream>
@@ -17,13 +19,13 @@ namespace ui{
 
 void save_cursor_position(){
 
-	cout << "\0337";
+	cout << "\033[s";
 }
 
 
 void restore_cursor_position(){
 
-	cout << "\0338";
+	cout << "\033[u";
 }
 
 
@@ -86,14 +88,8 @@ void draw_progress_bar(float progress){
 
 void clear_progress_bar(){
 
-	// Go to the next line
-	cout << "\033[E";
-
-	// Clear the line
-	cout << "\033[K";
-
-	// Go back a line
-	cout << "\033[F";
+	// Go down to the next line, clear it, then go back up
+	cout << "\033[E" << "\033[K" << "\033[F";
 }
 
 
@@ -114,7 +110,7 @@ void create_progress_bar(uint32_t thread_progress[], int num_threads){
 			total_seeds += thread_progress[i];
 		}
 
-		float progress = (float)total_seeds / UINT32_MAX;
+		float progress = (float)total_seeds / pow(2, 32);
 		draw_progress_bar(progress);
 
 		this_thread::sleep_for(chrono::milliseconds(100));
@@ -122,6 +118,7 @@ void create_progress_bar(uint32_t thread_progress[], int num_threads){
 
 	clear_progress_bar();
 	restore_cursor_position();
+	cout << "\033[2B" << "\033[2A"; // Fixes misalignment caused by terminal scrolling
 	cout.flush();
 }
 
@@ -185,11 +182,10 @@ void save_dialogue(const ExtractedData& d){
 
 	cout << "Filename (default is " << default_filename << "): ";
 
-	string filename;
-
 	// Get rid of newline character left in buffer
-	cin.ignore();
+	cin >> ws;
 
+	string filename;
 	getline(cin, filename);
 
 	if (filename == ""){

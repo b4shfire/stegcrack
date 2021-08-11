@@ -35,7 +35,7 @@ void crack_seeds(const vector<bool> bits, uint32_t start_seed, uint32_t end_seed
 		}
 
 		// Only update the progress counter every million seeds - this improves performance
-		if(seed % 1000000 == 0){
+		if ((seed-start_seed) % 1000000 == 999999){
 			progress_counter += 1000000;
 		}
 
@@ -54,7 +54,7 @@ vector<uint32_t> find_valid_seeds(const vector<bool>& bits, int num_threads){
 
 	// Array to store the number of seeds computed by each thread
 	uint32_t thread_progress[num_threads];
-	memset(&thread_progress, 0, num_threads);
+	memset(thread_progress, 0, num_threads * sizeof(thread_progress[0]));
 
 	// Array of vectors, each thread gets one vector in which to store its results
 	vector<uint32_t> thread_results[num_threads];

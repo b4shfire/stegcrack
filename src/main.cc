@@ -74,8 +74,8 @@ int main(int argc, char** argv){
 	}else{
 
 		// The probability of a non-stego file of this size generating valid metadata
-		//								initial num		magic 		version				payload_size			enc_algo
-		double coincidence_probability = pow(2, 32) / pow(2, 24) / pow(2, 1) * (bits.size()/3-65)/pow(2, 32) * 22.0 / 32;
+		//                               num seeds      magic       version              payload_size	          enc_algo
+		double coincidence_probability = pow(2, 32) / pow(2, 24) / pow(2, 1) * (bits.size()/3-65) / pow(2, 32) * 22.0 / 32;
 
 		cout << "\033[32m" << extracted_files.size() << " embedded file" << (extracted_files.size() == 1 ? "" : "s") << " found" << "\033[0m" << endl;
 		cout << "(Confidence: " <<  (1-coincidence_probability) * 100 << "%)" << endl;
