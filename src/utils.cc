@@ -54,7 +54,7 @@ vector<uint32_t> find_valid_seeds(const vector<bool>& bits, int num_threads){
 
 	// Array to store the number of seeds computed by each thread
 	uint32_t thread_progress[num_threads];
-	memset(thread_progress, 0, num_threads * sizeof(thread_progress[0]));
+	memset(thread_progress, 0, sizeof(thread_progress));
 
 	// Array of vectors, each thread gets one vector in which to store its results
 	vector<uint32_t> thread_results[num_threads];
