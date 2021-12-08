@@ -19,7 +19,7 @@ cd stegcrack/src
 
 Compile the program
 ```bash
-clang main.cc utils.cc file_handling.cc ui.cc Extractor.cc -ljpeg -pthread -lstdc++ -lz -lm -std=c++11 -O2 -o ../stegcrack
+clang++ main.cc utils.cc file_handling.cc ui.cc Extractor.cc -ljpeg -pthread -lz -std=c++11 -O2 -o ../stegcrack
 ```
 
 Move out of the source directory
