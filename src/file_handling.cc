@@ -129,15 +129,7 @@ vector<bool> load_jpeg(FILE* p_file){
 		heights_in_blocks[i] = ceil((float)(image_height * v_samp_factor) / (8 * max_v_samp_factor));
 		widths_in_blocks[i] = ceil((float)(image_width * h_samp_factor) / (8 * max_h_samp_factor));
 	}
-
-	int total_coeffs = 0;
-
-	// For each component
-	for (int i=0; i<num_components; i++){
-
-		// Add the number of coefficients in this component
-		total_coeffs += COEFFS_PER_BLOCK * (heights_in_blocks[i] * widths_in_blocks[i]);
-	}
+	
 
 	// Read data from jpeglib's multidimensional virtual array into the linear 'bits' vector
 	for (int icomp=0; icomp<num_components; icomp++) {
