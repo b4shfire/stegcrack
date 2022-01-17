@@ -114,8 +114,8 @@ vector<bool> load_jpeg(FILE* p_file){
 	}
 
 	// Arrays to store the block dimensions of each component
-	int* heights_in_blocks = new int[num_components];
-	int* widths_in_blocks = new int[num_components];
+	int heights_in_blocks[num_components];
+	int widths_in_blocks[num_components];
 
 	// For each component
 	for (int i=0; i<num_components; i++){
