@@ -113,8 +113,6 @@ vector<bool> load_jpeg(FILE* p_file){
 		max_h_samp_factor = max(max_h_samp_factor, image_data.comp_info[componentIndex].h_samp_factor);
 	}
 
-	int total_block_rows = 0;
-
 	// Arrays to store the block dimensions of each component
 	int* heights_in_blocks = new int[num_components];
 	int* widths_in_blocks = new int[num_components];
@@ -130,8 +128,6 @@ vector<bool> load_jpeg(FILE* p_file){
 		// (Cast to float to avoid integer truncation problems)
 		heights_in_blocks[i] = ceil((float)(image_height * v_samp_factor) / (8 * max_v_samp_factor));
 		widths_in_blocks[i] = ceil((float)(image_width * h_samp_factor) / (8 * max_h_samp_factor));
-
-		total_block_rows += heights_in_blocks[i];
 	}
 
 	int total_coeffs = 0;
