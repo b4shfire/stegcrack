@@ -107,10 +107,10 @@ vector<bool> load_jpeg(FILE* p_file){
 	int max_h_samp_factor = 0;
 
 	// Find the highest sample factors in the image
-	for (int componentIndex = 0; componentIndex < num_components; componentIndex++){
+	for (int i=0; i<num_components; i++){
 
-		max_v_samp_factor = max(max_v_samp_factor, image_data.comp_info[componentIndex].v_samp_factor);
-		max_h_samp_factor = max(max_h_samp_factor, image_data.comp_info[componentIndex].h_samp_factor);
+		max_v_samp_factor = max(max_v_samp_factor, image_data.comp_info[i].v_samp_factor);
+		max_h_samp_factor = max(max_h_samp_factor, image_data.comp_info[i].h_samp_factor);
 	}
 
 	// Arrays to store the block dimensions of each component
